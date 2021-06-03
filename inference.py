@@ -37,13 +37,13 @@ def predict_fn(input_data, model):
     
     start = time.time()
     rec = boto_fs_client.get_record(FeatureGroupName=fg_name, RecordIdentifierValueAsString=str(input_feat_id))
+    end = time.time()
     feat = rec.get('Record', None)
     if not feat:
         print (f'processing - unable to read feature record with id {input_feat_id}, for fg {fg_name}')
     else:
         resp_feat_id = feat[0]['ValueAsString']
         print (f'processing - successfull get of feature record with id {resp_feat_id}, in fg {fg_name}')
-    end = time.time()
     duration = end-start
     
     print (f'processing - duration = {duration}')
