@@ -11,7 +11,7 @@ Please make sure the role attached to the notebook instance has the below polici
 
 ## Sample Notebooks
 
-- [FS Get via Notebook](get_record.ipynb) -  getrecord api from notebook
+- [FS Get via Notebook](get_record.ipynb) -  getrecord from notebook
 - [FM Get via SM Endpoint](sm_endpoint_get_record) - getrecord from within a SageMaker endpoint
 
 
