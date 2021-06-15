@@ -6,14 +6,18 @@ import time
 import sys
 import subprocess
 import numpy as np
+import logging
 
-#from sagemaker_inference import content_types
-#from sagemaker_containers.beta.framework import encoders
 
 subprocess.check_call([sys.executable, "-m", "pip", "install", "sagemaker"])
 
 import boto3
 import sagemaker
+
+from sagemaker_containers.beta.framework import (
+    encoders,
+    worker
+)
 
 boto_session = boto3.Session()
 boto_fs_client = boto_session.client(service_name='sagemaker-featurestore-runtime')
@@ -46,11 +50,11 @@ def predict_fn(input_data, model):
     print (f'processing - duration = {duration}')
     
     if feats:
-        return ','.join(i['ValueAsString'] for i in feats)
+        return [','.join(i['ValueAsString'] for i in feats)]
     else:
-        return ''
+        return []
 
 #ref - https://github.com/aws/sagemaker-xgboost-container/blob/master/src/sagemaker_xgboost_container/handler_service.py
-def output_fn(prediction, content_type):
-    print (f'processing - output_fn with values = {prediction}, for output content_type = {content_type}')
-    return prediction
+def output_fn(prediction, accept):
+    print (f'processing - output_fn with values = {prediction}, for output content_type = {accept}')
+    return worker.Response(encoders.encode(prediction, accept), mimetype=accept)
