@@ -13,6 +13,7 @@ Please make sure the role attached to the notebook instance has the below polici
 
 - [FS Get via Notebook](get_record.ipynb) -  getrecord from notebook
 - [FS Get via SM Endpoint](sm_endpoint_get_record.ipynb) - getrecord from within a SageMaker endpoint
+- [FS Get via Lambda](lambda/lambda_fs_invoke.ipynb) - getrecord from lambda
 - [Inference Pipeline Sample with FS Get](inf_pipeline/sm_endpoint_pipeline.ipynb) - getrecord as pre-processing step in a SageMaker inference pipeline endpoint
 
 
